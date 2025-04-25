@@ -1,5 +1,3 @@
-# Vireo RHI template project
+# Vireo RHI hello triangle tutorial
 
-CMake-based template project for applications using the Vireo Rendering Hardware Interface.
-
-https://github.com/HenriMichelon/vireo_rhi
+Source code of the Vireo tutorial #1 : https://henrimichelon.github.io/Vireo/md_001_tutorial_triangle.html

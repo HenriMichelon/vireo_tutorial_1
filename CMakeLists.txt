@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.29)
 
 #######################################################
-project(vireo_template)
+project(vireo_tutorial_1)
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.env.cmake")
     message(FATAL_ERROR "Please create a .env.cmake file with the VIREO_PROJECT_DIR variable")
 endif ()
