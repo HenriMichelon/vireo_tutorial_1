@@ -12,11 +12,37 @@ void MyApp::onInit() {
         FRAMES_IN_FLIGHT);
     renderingConfig.colorRenderTargets[0].swapChain = swapChain;
 
+    vertexBuffer = vireo->createBuffer(
+            vireo::BufferType::VERTEX,
+            sizeof(Vertex),
+            triangleVertices.size());
+
+    const auto uploadCommandAllocator = vireo->createCommandAllocator(vireo::CommandType::TRANSFER);
+    const auto uploadCommandList = uploadCommandAllocator->createCommandList();
+    uploadCommandList->begin();
+    uploadCommandList->upload(vertexBuffer, &triangleVertices[0]);
+    uploadCommandList->end();
+    const auto transferQueue = vireo->createSubmitQueue(vireo::CommandType::TRANSFER);
+    transferQueue->submit({uploadCommandList});
+
+    const auto vertexLayout = vireo->createVertexLayout(sizeof(Vertex), vertexAttributes);
+    const auto vertexShader = vireo->createShaderModule("shaders/triangle_color.vert");
+    const auto fragmentShader = vireo->createShaderModule("shaders/triangle_color.frag");
+    pipeline = vireo->createGraphicPipeline(
+        vireo->createPipelineResources({}, {}),
+        vertexLayout,
+        vertexShader,
+        fragmentShader,
+        pipelineConfig);
+
     for (auto& frameData : framesData) {
         frameData.inFlightFence = vireo->createFence();
         frameData.commandAllocator = vireo->createCommandAllocator(vireo::CommandType::GRAPHIC);
         frameData.commandList = frameData.commandAllocator->createCommandList();
     }
+
+    transferQueue->waitIdle();
+    uploadCommandList->cleanup();
 }
 
 void MyApp::onRender() {
@@ -30,9 +56,12 @@ void MyApp::onRender() {
         vireo::ResourceState::UNDEFINED,
         vireo::ResourceState::RENDER_TARGET_COLOR);
     frameData.commandList->beginRendering(renderingConfig);
-    frameData.commandList->setViewports(1, {swapChain->getExtent()});
-    frameData.commandList->setScissors(1, {swapChain->getExtent()});
-    // commands will be recorded and submitted here
+    frameData.commandList->setViewport(swapChain->getExtent());
+    frameData.commandList->setScissors(swapChain->getExtent());
+
+    frameData.commandList->bindPipeline(pipeline);
+    frameData.commandList->bindVertexBuffer(vertexBuffer);
+    frameData.commandList->draw(triangleVertices.size());
 
     frameData.commandList->endRendering();
     frameData.commandList->barrier(
