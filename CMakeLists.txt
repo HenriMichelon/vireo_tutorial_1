@@ -15,6 +15,7 @@ include(.env.cmake)
 if (NOT DEFINED VIREO_PROJECT_DIR)
     message(FATAL_ERROR "Please set VIREO_PROJECT_DIR in the .env.cmake file")
 endif()
+set(DIRECTX_BACKEND ON)
 
 #######################################################
 set(CMAKE_CXX_STANDARD 23)
@@ -86,7 +87,9 @@ function(build_target TARGET_NAME SRCS MODULES)
                 "<windows.h>"
                 "<cstdint>"
         )
-        target_link_libraries(${TARGET_NAME} Xinput dinput8 dxguid dxgi d3d12 d3dcompiler)
+        if (DIRECTX_BACKEND)
+            target_link_libraries(${TARGET_NAME} Xinput dinput8 dxguid dxgi d3d12 d3dcompiler)
+        endif ()
         if(MINGW)
             target_link_options(${TARGET_NAME} PRIVATE "-mwindows")
         endif()
