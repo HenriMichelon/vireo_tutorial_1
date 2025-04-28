@@ -36,7 +36,7 @@ private:
         { { -0.25f, -0.25f, 0.0f }, { 0.0f, 0.0f, 1.0f } }
     };
 
-    const vireo::GraphicPipelineConfiguration pipelineConfig {
+    vireo::GraphicPipelineConfiguration pipelineConfig {
         .colorRenderFormats = {vireo::ImageFormat::R8G8B8A8_SRGB},
         .colorBlendDesc = {{}}
     };

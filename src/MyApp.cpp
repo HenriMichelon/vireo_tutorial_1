@@ -28,12 +28,12 @@ void MyApp::onInit() {
     const auto vertexLayout = vireo->createVertexLayout(sizeof(Vertex), vertexAttributes);
     const auto vertexShader = vireo->createShaderModule("shaders/triangle_color.vert");
     const auto fragmentShader = vireo->createShaderModule("shaders/triangle_color.frag");
-    pipeline = vireo->createGraphicPipeline(
-        vireo->createPipelineResources({}, {}),
-        vertexLayout,
-        vertexShader,
-        fragmentShader,
-        pipelineConfig);
+
+    pipelineConfig.resources = vireo->createPipelineResources();
+    pipelineConfig.vertexInputLayout = vertexLayout;
+    pipelineConfig.vertexShader = vertexShader;
+    pipelineConfig.fragmentShader = fragmentShader;
+    pipeline = vireo->createGraphicPipeline(pipelineConfig);
 
     for (auto& frameData : framesData) {
         frameData.inFlightFence = vireo->createFence();
