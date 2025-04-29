@@ -33,5 +33,5 @@ public:
 
 protected:
     void* windowHandle{nullptr};
-    std::unique_ptr<vireo::Vireo> vireo{nullptr};
+    std::shared_ptr<vireo::Vireo> vireo{nullptr};
 };

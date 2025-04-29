@@ -36,7 +36,7 @@ void MyApp::onInit() {
     pipeline = vireo->createGraphicPipeline(pipelineConfig);
 
     for (auto& frameData : framesData) {
-        frameData.inFlightFence = vireo->createFence();
+        frameData.inFlightFence = vireo->createFence(true);
         frameData.commandAllocator = vireo->createCommandAllocator(vireo::CommandType::GRAPHIC);
         frameData.commandList = frameData.commandAllocator->createCommandList();
     }
