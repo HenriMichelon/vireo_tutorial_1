@@ -56,8 +56,12 @@ void MyApp::onRender() {
         vireo::ResourceState::UNDEFINED,
         vireo::ResourceState::RENDER_TARGET_COLOR);
     frameData.commandList->beginRendering(renderingConfig);
-    frameData.commandList->setViewport(swapChain->getExtent());
-    frameData.commandList->setScissors(swapChain->getExtent());
+    frameData.commandList->setViewport(vireo::Viewport{
+        .width  = static_cast<float>(swapChain->getExtent().width),
+        .height = static_cast<float>(swapChain->getExtent().height)});
+    frameData.commandList->setScissors(vireo::Rect{
+        .width  = swapChain->getExtent().width,
+        .height = swapChain->getExtent().height});
 
     frameData.commandList->bindPipeline(pipeline);
     frameData.commandList->bindVertexBuffer(vertexBuffer);
