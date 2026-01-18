@@ -1,8 +1,10 @@
 module;
-#include "Libraries.h"
 #include <cstddef>
 export module myapp;
 
+import glm;
+import std;
+import vireo;
 import app;
 
 export class MyApp : public Application {

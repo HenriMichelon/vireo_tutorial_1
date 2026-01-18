@@ -4,10 +4,10 @@
 * This software is released under the MIT License.
 * https://opensource.org/licenses/MIT
 */
-module;
-#include "Libraries.h"
 export module app.sdl;
 
+import std;
+import vireo;
 import app;
 
 export namespace samples {

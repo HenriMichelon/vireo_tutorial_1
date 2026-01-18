@@ -1,5 +1,3 @@
-module;
-#include "Libraries.h"
 module myapp;
 
 void MyApp::onInit() {
