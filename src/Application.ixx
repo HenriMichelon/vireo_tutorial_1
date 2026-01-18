@@ -12,7 +12,7 @@ export class Application {
 public:
     virtual ~Application() = default;
 
-    void init(const vireo::Backend backend, void* windowHandle) {
+    void init(const vireo::Backend backend, vireo::PlatformWindowHandle windowHandle) {
         this->windowHandle = windowHandle;
         vireo = vireo::Vireo::create(backend);
     }
@@ -27,11 +27,11 @@ public:
 
     virtual void onResize() {}
 
-    virtual void onKeyDown(uint32_t key) {}
+    virtual void onKeyDown(std::uint32_t key) {}
 
-    virtual void onKeyUp(uint32_t key) {}
+    virtual void onKeyUp(std::uint32_t key) {}
 
 protected:
-    void* windowHandle{nullptr};
+    vireo::PlatformWindowHandle windowHandle{nullptr};
     std::shared_ptr<vireo::Vireo> vireo{nullptr};
 };

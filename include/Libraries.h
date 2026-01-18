@@ -1,7 +1,9 @@
 #pragma once
 
-#include <cstdint>
-#include <cstddef>
+#ifdef WIN32
+    #include <windows.h>
+    #include <glm/glm.hpp>
+#endif
 
 import std;
 import glm;
