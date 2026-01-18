@@ -58,7 +58,6 @@ file(GLOB_RECURSE SHADERS_SOURCE_FILES
         "${SHADERS_SRC_DIR}/*.slang"
 )
 add_shaders(shaders ${SHADERS_BUILD_DIR} ${SHADERS_INCLUDE_DIR} ${SHADERS_SOURCE_FILES} )
-#add_dependencies(target_shaders ${VIREO_TARGET})
 
 #######################################################
 # Platform specific files
