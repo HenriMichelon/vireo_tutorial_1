@@ -89,7 +89,7 @@ function(build_target TARGET_NAME SRCS MODULES)
             ${MODULES}
     )
     vireo_compile_options(${TARGET_NAME})
-    target_include_directories(${TARGET_NAME} PUBLIC ${INCLUDE_DIR} ${VIREO_INCLUDE_DIR})
+    target_include_directories(${TARGET_NAME} PUBLIC ${INCLUDE_DIR})
     target_link_libraries(${TARGET_NAME} ${VIREO_TARGET} glm::glm glm-modules)
     add_dependencies(${TARGET_NAME} ${VIREO_TARGET} shaders)
 endfunction()
