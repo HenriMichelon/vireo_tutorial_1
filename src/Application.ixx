@@ -13,9 +13,9 @@ export class Application {
 public:
     virtual ~Application() = default;
 
-    void init(const vireo::Backend backend, vireo::PlatformWindowHandle windowHandle) {
+    void init(const vireo::BackendConfiguration config, vireo::PlatformWindowHandle windowHandle) {
         this->windowHandle = windowHandle;
-        vireo = vireo::Vireo::create(backend);
+        vireo = vireo::Vireo::create(config);
     }
 
     virtual void onInit() = 0;

@@ -51,7 +51,9 @@ namespace samples {
             throw vireo::Exception("Error creating SDL window : ", SDL_GetError());
         }
 
-        app->init(vireo::Backend::VULKAN, windowHandle);
+        auto config = vireo::BackendConfiguration{};
+        config.backend = vireo::Backend::VULKAN;
+        app->init(config, windowHandle);
         try {
             app->onInit();
             SDL_ShowWindow(windowHandle);
