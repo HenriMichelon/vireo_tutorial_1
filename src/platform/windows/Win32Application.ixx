@@ -5,9 +5,11 @@
 * https://opensource.org/licenses/MIT
 */
 module;
-#include "Libraries.h"
+#include <windows.h>
 export module app.win32;
 
+import std;
+import vireo;
 import app;
 
 export namespace samples {
@@ -16,7 +18,7 @@ export namespace samples {
     public:
         static int run(
             const std::shared_ptr<Application>& app,
-            uint32_t width, uint32_t height,
+            std::uint32_t width, std::uint32_t height,
             const std::wstring& name,
             HINSTANCE hInstance,
             int nCmdShow);
